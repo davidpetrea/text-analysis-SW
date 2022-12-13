@@ -13,7 +13,7 @@ library(wordcloud2)
 library(reshape2) 
 library(gdata) 
 library(stringr) 
-#setwd("C:/Users/wyver/Desktop/Master/An 2/Sem 1/Text/project")
+setwd("C:/Users/wyver/Desktop/Master/An 2/Sem 1/Text/project")
 
 # Read the text files
 ep4 <- read.table("./texts/SW_EpisodeIV.txt")
