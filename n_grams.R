@@ -1,41 +1,17 @@
-#Bigrams
+#Bigrams summary for trilogy using custom function
+bigrams_summary(trilogy)
 
-en_stopwords<-stopwords::stopwords("en", source = "snowball")
+#Trigrams summary for trilogy using custom function
+trigrams_summary(trilogy)
 
-trilogy_bigrams<-trilogy %>%
-  unnest_tokens(bigram, dialogue,token="ngrams",n=2)
+#Sections
+trilogy_sections_words<-trilogy %>%
+  mutate(section=row_number()%/%10) %>%
+  filter(section>0) %>%
+  unnest_tokens(word, dialogue) %>%
+  filter(!word %in% en_stopwords)
 
-trilogy_bigrams %>%
-  count(bigram,sort=TRUE)
-
-bigrams_separated<-trilogy_bigrams %>%
-  separate(bigram,c("word1","word2"),sep=" ")
-
-bigrams_filtered<-bigrams_separated %>%
-  filter(!word1 %in% en_stopwords) %>%
-  filter(!word2 %in% en_stopwords)
-
-bigram_counts<-bigrams_filtered %>%
-  count(word1,word2,sort=TRUE)
-bigram_counts
-
-#tri-grams
-triology_trigrams<-trilogy %>%
-  unnest_tokens(trigram, dialogue,token="ngrams",n=3) %>%
-  separate(trigram,c("word1","word2","word3"),sep=" ") %>%
-  filter(!word1 %in% en_stopwords,
-         !word2 %in% en_stopwords,
-         !word3 %in% en_stopwords) %>%
-  count(word1,word2,word3,sort=TRUE)
-
-
-triology_sections_words<-trilogy%>%
-  mutate(section=row_number()%/%10)%>%
-  filter(section>0)%>%
-  unnest_tokens(word, dialogue)%>%
-  filter(!word%in%en_stopwords)
-
-word_pairs <- triology_sections_words %>%
+word_pairs <- trilogy_sections_words %>%
   pairwise_count(word, section, sort = TRUE)
 word_pairs
 
@@ -52,14 +28,14 @@ word_pairs %>%
 #lord, luke, ship
 
 #Coef Phi
-word_cors <- triology_sections_words %>%
+word_cors <- trilogy_sections_words %>%
   group_by(word) %>%
   filter(n() >= 20) %>%
   pairwise_cor(word, section, sort = TRUE)
 word_cors
 
 word_cors %>%
-  filter(item1 == "master")
+  filter(item1 == "force")
 
 #View correlations
 word_cors %>%

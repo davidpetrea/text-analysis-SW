@@ -1,3 +1,20 @@
+
+#Tokenize each episode
+tidy_ep4 <-ep4 %>%
+  group_by(character) %>%
+  unnest_tokens(word, dialogue) %>%
+  anti_join(stop_words)
+
+tidy_ep5 <-ep5 %>%
+  group_by(character) %>%
+  unnest_tokens(word, dialogue) %>%
+  anti_join(stop_words)
+
+tidy_ep6 <-ep6 %>%
+  group_by(character) %>%
+  unnest_tokens(word, dialogue) %>%
+  anti_join(stop_words)
+
 #Frequencies
 frequency<-bind_rows(mutate(tidy_ep4,episode="Ep4"),
                      mutate(tidy_ep5,episode="Ep5"),
@@ -28,4 +45,4 @@ ggplot(frequency, aes(x = proportion, y = `Ep6`,
 cor.test(data=frequency[frequency$episode=="Ep4",], ~proportion + `Ep6`)
 
 cor.test(data=frequency[frequency$episode=="Ep5",], ~proportion + `Ep6`)
-#Exista o corelatie mai puternica intre episoadele 5 si 6 
+#There is a stronger correlation between episode 5 & 6
