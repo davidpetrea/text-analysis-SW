@@ -37,21 +37,6 @@ tidy_ep6 <-ep6 %>%
   unnest_tokens(word, dialogue) %>%
   anti_join(stop_words)
 
-characters_ep4<-unique(tidy_ep4$character)
-characters_ep4
-characters_ep5<-unique(tidy_ep5$character)
-characters_ep5
-characters_ep6<-unique(tidy_ep6$character)
-characters_ep6
-
-#top 5 word per character
-top_5_word_count<-tidy_ep4 %>% 
- summarize(count=n()) %>%
- top_n(5) %>%
- arrange(desc(count))
- 
-top_5_word_count 
-
 #word counts 
 tidy_ep4 %>%
   count(word,sort=TRUE)

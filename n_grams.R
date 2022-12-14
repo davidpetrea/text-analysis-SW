@@ -29,7 +29,6 @@ triology_trigrams<-trilogy %>%
   count(word1,word2,word3,sort=TRUE)
 
 
-
 triology_sections_words<-trilogy%>%
   mutate(section=row_number()%/%10)%>%
   filter(section>0)%>%
@@ -52,7 +51,6 @@ word_pairs %>%
 #Words often found within the same section as "vader"
 #lord, luke, ship
 
-
 #Coef Phi
 word_cors <- triology_sections_words %>%
   group_by(word) %>%
@@ -65,7 +63,7 @@ word_cors %>%
 
 #View correlations
 word_cors %>%
-  filter(item1 %in% c("dark", "force", "obi", "master")) %>%
+  filter(item1 %in% c("dark", "princess", "jedi", "master")) %>%
   group_by(item1) %>%
   top_n(6) %>%
   ungroup() %>%
