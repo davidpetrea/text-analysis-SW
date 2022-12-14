@@ -13,6 +13,7 @@ library(wordcloud2)
 library(reshape2) 
 library(gdata) 
 library(stringr) 
+library(stopwords)
 setwd("C:/Users/wyver/Desktop/Master/An 2/Sem 1/Text/project")
 
 # Read the text files

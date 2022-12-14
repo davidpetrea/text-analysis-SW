@@ -77,7 +77,7 @@ word_cors %>%
 
 set.seed(123)
 
-
+#nodes
 word_cors %>%
   filter(correlation > .15) %>%
   graph_from_data_frame() %>%
