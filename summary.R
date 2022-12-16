@@ -103,5 +103,7 @@ text_summary(ep4)
 
 top_characters_summary(ep6)
 
+script_summary(ep6)
+
 
 

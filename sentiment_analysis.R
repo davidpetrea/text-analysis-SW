@@ -14,17 +14,23 @@ tokens %>%
 
 #NRC Lexicon
 nrc_all<-get_sentiments("nrc")
+
 nrc_trust <-get_sentiments("nrc") %>%
   filter(sentiment =="trust")
-nrc_fear<-get_sentiments("nrc") %>%
-  filter(sentiment =="fear")
-
-
 #Trust words for C-3PO
 tokens %>%
   filter(character=="THREEPIO") %>%
   inner_join(nrc_trust) %>%
-  count(word,set=TRUE)
+  count(word,set=TRUE,sort=TRUE)
+
+
+nrc_fear<-get_sentiments("nrc") %>%
+  filter(sentiment =="fear")
+#Fear words for Vader
+tokens %>%
+  filter(character=="LUKE") %>%
+  inner_join(nrc_fear) %>%
+  count(word,set=TRUE,sort=TRUE)
 
 #Sections 10
 trilogy_sentiments_10 <-tokens %>%

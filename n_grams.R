@@ -22,7 +22,7 @@ word_pairs %>%
 #jedi, time, master, force, training
 
 word_pairs %>%
-  filter(item1 == "vader")
+  filter(item1 == "dark")
 
 #Words often found within the same section as "vader"
 #lord, luke, ship
@@ -57,6 +57,6 @@ word_cors %>%
   graph_from_data_frame() %>%
   ggraph(layout = "fr") +
   geom_edge_link(aes(edge_alpha = correlation), show.legend = FALSE) +
-  geom_node_point(color = "lightblue", size = 5) +
+  geom_node_point(color = "orange", size = 3) +
   geom_node_text(aes(label = name), repel = TRUE) +
   theme_void()
