@@ -1,19 +1,11 @@
 #Custom function that prints a general summary (bigrams, wordcloud, top characters) given a text data frame
 #with 2 columns: character and dialogue 
 text_summary <- function(text) {
-  print("Dialogues count:")
-  print(length(text$dialogue)) #Replace dialogue with name of column where the text is
-  print("Characters count:")
-  print(length(unique(text$character)))   #Expects a column containing the character saying the line
+  #How many dialogues, characters?
+  script_summary(text)
   
-  top_characters <- as.data.frame(sort(table(text$character), decreasing=TRUE))[1:10,]
-  # Visualization 
-  top_graph <-ggplot(data=top_characters, aes(x=Var1, y=Freq)) +
-    geom_bar(stat="identity", fill="#56B4E9", colour="black") +
-    theme_bw() +
-    theme(axis.text.x=element_text(angle=45, hjust=1)) +
-    labs(x="Character", y="Number of dialogues")
-  print(top_graph)
+  #Top character by dialogues count
+  top_characters_summary(text)
   
   #Wordcloud
   custom_wordcloud(text)
@@ -25,6 +17,24 @@ text_summary <- function(text) {
   trigrams_summary(text)
   
   
+}
+script_summary <-function(text) {
+  print("Dialogues count:")
+  print(length(text$dialogue)) #Replace dialogue with name of column where the text is
+  print("Characters count:")
+  print(length(unique(text$character)))   #Expects a column containing the character saying the line
+  
+}
+
+top_characters_summary <-function(text) {
+  top_characters <- as.data.frame(sort(table(text$character), decreasing=TRUE))[1:10,]
+  # Visualization 
+  top_graph <-ggplot(data=top_characters, aes(x=Var1, y=Freq)) +
+    geom_bar(stat="identity", fill="#56B4E9", colour="black") +
+    theme_bw() +
+    theme(axis.text.x=element_text(angle=45, hjust=1)) +
+    labs(x="Character", y="Number of dialogues")
+  print(top_graph)
 }
 
 bigrams_summary <- function(text) {
@@ -91,7 +101,7 @@ custom_wordcloud <-function(text) {
 
 text_summary(ep4)
 
-
+top_characters_summary(ep6)
 
 
 

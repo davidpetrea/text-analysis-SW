@@ -45,4 +45,5 @@ ggplot(frequency, aes(x = proportion, y = `Ep6`,
 cor.test(data=frequency[frequency$episode=="Ep4",], ~proportion + `Ep6`)
 
 cor.test(data=frequency[frequency$episode=="Ep5",], ~proportion + `Ep6`)
+
 #There is a stronger correlation between episode 5 & 6
