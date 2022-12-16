@@ -21,6 +21,9 @@ text_summary <- function(text) {
   #Bigrams
   bigrams_summary(text)
   
+  #Trigrams
+  trigrams_summary(text)
+  
   
 }
 
