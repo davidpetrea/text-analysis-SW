@@ -95,7 +95,7 @@ custom_wordcloud <-function(text) {
   wordcloud_tokens <-episode_tokens %>%
     anti_join(stop_words) %>%
     count(word)
-  print(wordcloud2(wordcloud_tokens, size=0.4))
+  print(wordcloud2(wordcloud_tokens, size=0.7,backgroundColor="black"))
  
 }
 
@@ -105,5 +105,6 @@ top_characters_summary(ep6)
 
 script_summary(ep6)
 
+custom_wordcloud(ep6)
 
 

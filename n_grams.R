@@ -49,7 +49,7 @@ word_cors %>%
   coord_flip()
 
 set.seed(123)
-
+par(bg = 'blue')
 #nodes
 word_cors %>%
   filter(correlation > .15) %>%

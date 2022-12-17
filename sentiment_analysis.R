@@ -5,12 +5,13 @@ tokens <- trilogy %>%
   ungroup() %>%
   unnest_tokens(word, dialogue)
 
+
 # Positive and negative words -bing lexicon
 tokens %>%
   inner_join(get_sentiments("bing")) %>%
   count(word, sentiment, sort=TRUE) %>%
   acast(word ~ sentiment, value.var="n", fill=0) %>%
-  comparison.cloud(colors=c("#F8766D", "#00BFC4"), max.words=100)
+  comparison.cloud(colors=c("#F8766D", "#00BFC4"),match.colors = TRUE, max.words=100)
 
 #NRC Lexicon
 nrc_all<-get_sentiments("nrc")
@@ -45,9 +46,10 @@ trilogy_sentiments_10 <-tokens %>%
   spread(sentiment,n,fill=0) %>%
   mutate(sentiment = positive - negative)
 
+
 ggplot(trilogy_sentiments_10, aes(index,sentiment,fill=episode)) +
   geom_col(show.legend = FALSE) +
-  facet_wrap(~episode,ncol=2,scales="free_x")
+  facet_wrap(~episode,ncol=1,scales="free_x")
 
 #Afinn 20 -tokens
 afinn_20<-tokens %>%
