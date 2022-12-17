@@ -13,7 +13,6 @@ trilogy_sections_words<-trilogy %>%
 
 word_pairs <- trilogy_sections_words %>%
   pairwise_count(word, section, sort = TRUE)
-word_pairs
 
 word_pairs %>%
   filter(item1 == "yoda")

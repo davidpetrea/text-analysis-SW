@@ -21,16 +21,22 @@ nrc_trust <-get_sentiments("nrc") %>%
 tokens %>%
   filter(character=="THREEPIO") %>%
   inner_join(nrc_trust) %>%
-  count(word,set=TRUE,sort=TRUE)
-
+  count(word,sort=TRUE)
+#Trust words for C-3PO
 
 nrc_fear<-get_sentiments("nrc") %>%
   filter(sentiment =="fear")
-#Fear words for Vader
+#Fear words for Luke
 tokens %>%
   filter(character=="LUKE") %>%
   inner_join(nrc_fear) %>%
-  count(word,set=TRUE,sort=TRUE)
+  count(word,sort=TRUE)
+#Fear words for Luke
+tokens %>%
+  filter(character=="VADER") %>%
+  inner_join(nrc_fear) %>%
+  count(word,sort=TRUE)
+
 
 #Sections 10
 trilogy_sentiments_10 <-tokens %>%
@@ -147,7 +153,7 @@ top_chars_tokens %>%
   theme_bw()
 
 
-# Most relevant words for each character - after tf_idf
+# Most relevant words for each character - tf_idf
 top_chars_tokens %>%
   count(character, word) %>%
   bind_tf_idf(word, character, n) %>%
@@ -161,7 +167,6 @@ top_chars_tokens %>%
   geom_col(aes(fill=character), show.legend=FALSE) +
   facet_wrap(~character, scales="free_y") +
   theme(axis.text.x=element_text(angle=45, hjust=1)) +
-  labs(y="tf–idf", x="Sentiment") +
   scale_x_discrete(labels=function(x) gsub("__.+$", "", x)) +
   coord_flip() +
   theme_bw()
